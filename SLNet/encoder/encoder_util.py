@@ -179,8 +179,9 @@ class CrossResidualExpert(nn.Module):
         if self.ch_ag == 0:
             return ad
         # non-parametric reduce: max over points for first ch_ag channels of ad
-        reduced = ad[:, :self.ch_ag, :].max(dim=2, keepdim=True)[0] 
-        ag = reduced.expand(-1, -1, N)
+        # reduced = ad[:, :self.ch_ag, :].max(dim=2, keepdim=True)[0]
+        # ag = reduced.expand(-1, -1, N)
+        ag = F.adaptive_max_pool1d(ad.permute(0,2,1), self.ch_ag).permute(0,2,1)
         ag = self.act(self.drop(self.ag_mlp(ag) * w_ag + ag))
         if self.se_mode:
             ag = self.ag_se(ag)
