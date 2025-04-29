@@ -35,7 +35,7 @@ CLASSIFIER_MODE='mlp_very_large'  # 'mlp_very_very_large' 'mlp_very_large' 'mlp_
 BATCH_SIZE_ModelNet=50
 BATCH_SIZE_ScanObject=50
 
-EPOCH_ModelNet=1        #300
+EPOCH_ModelNet=300
 EPOCH_ScanObject=200
 
 MIN_LR_ModelNet=0.005
